@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Filament\Resources\ExamResource\Pages;
+
+use App\Filament\Resources\ExamResource;
+use Filament\Actions;
+use Filament\Resources\Pages\EditRecord;
+
+class EditExam extends EditRecord
+{
+    protected static string $resource = ExamResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\DeleteAction::make(),
+            Actions\ForceDeleteAction::make(),
+            Actions\RestoreAction::make(),
+        ];
+    }
+}
