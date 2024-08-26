@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\Exam;
@@ -34,6 +35,18 @@ class DatabaseSeeder extends Seeder
         $this->command->warn(PHP_EOL . 'Creating some fake users...');
         $users = User::factory(19)->create();
         $this->command->info('Fake users created.');
+
+        $this->command->warn(PHP_EOL . 'Creating New Role...');
+        $sadminRole = Role::create(['name' => 'Superadmin']);
+        $userRole = Role::create(['name' => 'User']);
+        $this->command->info('Role created.');
+
+        $this->command->warn(PHP_EOL . 'Assigning Roles...');
+        $sadminUser->assignRole($sadminRole);
+        foreach($users as $user){
+            $user->assignRole($userRole);
+        }
+        $this->command->info('Role Assigned.');
 
         $this->command->warn(PHP_EOL . 'Adding some Exams...');
         $options = Option::factory(1)->create();
