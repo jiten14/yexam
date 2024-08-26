@@ -11,7 +11,7 @@
             <h2 class="text-center">Score Card of {{$user->name}}</h2>
             </br>
             @if($scores->isNotEmpty())
-                {{$scores}}
+                {{--$scores--}}
                 <table class="table table-hover">
                     <thead>
                         <tr>
